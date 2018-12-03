@@ -4,6 +4,8 @@ from requests import get
 
 
 class Rezult:
+    __slots__ = ['name', 'url', 'desc']
+
     def __init__(self, name, url, desc):
         self.name = name
         self.url = url
@@ -15,6 +17,8 @@ class GoogleParser:
     what - search query\n
     pages - pages for parse
     '''
+
+    __slots__ = ['what', '__pages', '__query', 'output']
 
     def __init__(self, what, pages=0):
         self.output = []
