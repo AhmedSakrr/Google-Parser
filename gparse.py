@@ -1,4 +1,5 @@
 from urllib.parse import unquote
+
 from bs4 import BeautifulSoup
 from requests import get
 
@@ -22,22 +23,16 @@ class GoogleParser:
 
     def __init__(self, what, pages=0):
         self.output = []
-        self.__pages = pages if pages != 0 else pages - 1
+        self.__pages = pages
         self.__query = what
         self.__search()
 
 
     def __search(self):
-        i = 0
-
-        while True:
+        for i in range(self.__pages + 1):
             r = get('https://www.google.dk/search?q=' +
                     self.__query + '&start=' + str(i*10)).text
             self.__parse(r)
-            i += 1
-
-            if i > self.__pages:
-                break
 
 
     def __parse(self, html):
